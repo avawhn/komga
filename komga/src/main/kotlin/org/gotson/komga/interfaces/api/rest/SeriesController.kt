@@ -153,6 +153,8 @@ class SeriesController(
     @RequestParam(name = "deleted", required = false) deleted: Boolean? = null,
     @RequestParam(name = "complete", required = false) complete: Boolean? = null,
     @RequestParam(name = "oneshot", required = false) oneshot: Boolean? = null,
+    @RequestParam(name = "source_type", required = false) sourceType: String? = null,
+    @RequestParam(name = "source_id", required = false) sourceId: String? = null,
     @RequestParam(name = "unpaged", required = false) unpaged: Boolean = false,
     @Parameter(hidden = true) @Authors authors: List<Author>? = null,
     @Parameter(hidden = true) page: Pageable,
@@ -202,6 +204,8 @@ class SeriesController(
                 )
 
               if (!sharingLabels.isNullOrEmpty()) add(SearchCondition.AnyOfSeries(sharingLabels.map { SearchCondition.SharingLabel(SearchOperator.Is(it)) }))
+              sourceType?.let { add(SearchCondition.SourceType(SearchOperator.Is(it))) }
+              sourceId?.let { add(SearchCondition.SourceId(SearchOperator.Is(it))) }
               oneshot?.let { add(SearchCondition.OneShot(if (it) SearchOperator.IsTrue else SearchOperator.IsFalse)) }
               complete?.let { add(SearchCondition.Complete(if (it) SearchOperator.IsTrue else SearchOperator.IsFalse)) }
               deleted?.let { add(SearchCondition.Deleted(if (it) SearchOperator.IsTrue else SearchOperator.IsFalse)) }
@@ -738,6 +742,8 @@ class SeriesController(
               existing.alternateTitles
             },
           alternateTitlesLock = alternateTitlesLock ?: existing.alternateTitlesLock,
+          sourceType = sourceType ?: existing.sourceType,
+          sourceId = sourceId ?: existing.sourceId,
         )
       }
     seriesMetadataRepository.update(updated)

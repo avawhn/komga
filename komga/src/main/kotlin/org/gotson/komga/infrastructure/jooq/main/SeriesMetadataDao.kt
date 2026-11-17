@@ -107,6 +107,8 @@ class SeriesMetadataDao(
       .set(d.SHARING_LABELS_LOCK, metadata.sharingLabelsLock)
       .set(d.LINKS_LOCK, metadata.linksLock)
       .set(d.ALTERNATE_TITLES_LOCK, metadata.alternateTitlesLock)
+      .set(d.SOURCE_TYPE, metadata.sourceType)
+      .set(d.SOURCE_ID, metadata.sourceId)
       .execute()
 
     dslRW.insertGenres(metadata)
@@ -143,6 +145,8 @@ class SeriesMetadataDao(
       .set(d.SHARING_LABELS_LOCK, metadata.sharingLabelsLock)
       .set(d.LINKS_LOCK, metadata.linksLock)
       .set(d.ALTERNATE_TITLES_LOCK, metadata.alternateTitlesLock)
+      .set(d.SOURCE_TYPE, metadata.sourceType)
+      .set(d.SOURCE_ID, metadata.sourceId)
       .set(d.LAST_MODIFIED_DATE, LocalDateTime.now(ZoneId.of("Z")))
       .where(d.SERIES_ID.eq(metadata.seriesId))
       .execute()
@@ -312,6 +316,8 @@ class SeriesMetadataDao(
     sharingLabels = sharingLabels,
     links = links,
     alternateTitles = alternateTitles,
+    sourceType = sourceType,
+    sourceId = sourceId,
     statusLock = statusLock,
     titleLock = titleLock,
     titleSortLock = titleSortLock,

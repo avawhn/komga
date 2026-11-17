@@ -99,4 +99,8 @@ class SeriesMetadataUpdateDto {
     }
 
   var alternateTitlesLock: Boolean? = null
+  @get:NullOrNotBlank
+  var sourceType: String? = null
+  @get:NullOrNotBlank
+  var sourceId: String? = null
 }

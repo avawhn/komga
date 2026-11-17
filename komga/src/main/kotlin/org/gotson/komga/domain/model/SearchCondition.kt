@@ -15,7 +15,7 @@ class SearchCondition {
 
   @Schema(
     name = "SearchConditionSeries",
-    oneOf = [AnyOfSeries::class, AllOfSeries::class, LibraryId::class, CollectionId::class, Deleted::class, Complete::class, OneShot::class, Title::class, TitleSort::class, ReleaseDate::class, Tag::class, SharingLabel::class, Publisher::class, Language::class, Genre::class, AgeRating::class, ReadStatus::class, SeriesStatus::class, Author::class],
+    oneOf = [AnyOfSeries::class, AllOfSeries::class, LibraryId::class, CollectionId::class, Deleted::class, Complete::class, OneShot::class, Title::class, TitleSort::class, ReleaseDate::class, Tag::class, SharingLabel::class, Publisher::class, Language::class, Genre::class, AgeRating::class, ReadStatus::class, SeriesStatus::class, Author::class, SourceType::class, SourceId::class],
   )
   @JsonTypeInfo(use = JsonTypeInfo.Id.DEDUCTION)
   sealed interface Series
@@ -191,6 +191,18 @@ class SearchCondition {
     val operator: SearchOperator.Equality<AuthorMatch>,
   ) : Book,
     Series
+
+  @Schema(name = "SearchConditionSourceType")
+  data class SourceType(
+    @JsonProperty("sourceType")
+    val operator: SearchOperator.Equality<String>,
+  ) : Series
+
+  @Schema(name = "SearchConditionSourceId")
+  data class SourceId(
+    @JsonProperty("sourceId")
+    val operator: SearchOperator.Equality<String>,
+  ) : Series
 
   @JsonInclude(JsonInclude.Include.NON_NULL)
   data class AuthorMatch(

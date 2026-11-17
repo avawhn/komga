@@ -446,6 +446,8 @@ class SeriesDtoDao(
     linksLock = linksLock,
     alternateTitles = alternateTitles,
     alternateTitlesLock = alternateTitlesLock,
+    sourceType = sourceType,
+    sourceId = sourceId,
   )
 
   private fun BookMetadataAggregationRecord.toDto(

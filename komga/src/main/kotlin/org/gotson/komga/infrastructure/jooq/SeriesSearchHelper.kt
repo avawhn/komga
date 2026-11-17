@@ -94,6 +94,18 @@ class SeriesSearchHelper(
             RequiredJoin.SeriesMetadata,
           )
 
+      is SearchCondition.SourceType ->
+        searchCondition.operator.toCondition(Tables.SERIES_METADATA.SOURCE_TYPE) to
+          setOf(
+            RequiredJoin.SeriesMetadata,
+          )
+
+      is SearchCondition.SourceId ->
+        searchCondition.operator.toCondition(Tables.SERIES_METADATA.SOURCE_ID) to
+          setOf(
+            RequiredJoin.SeriesMetadata,
+          )
+
       is SearchCondition.Tag ->
         Tables.SERIES.ID.let { field ->
           val innerEquals = { tag: String ->

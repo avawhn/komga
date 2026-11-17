@@ -56,6 +56,8 @@ data class SeriesMetadataDto(
   val linksLock: Boolean,
   val alternateTitles: List<AlternateTitleDto>,
   val alternateTitlesLock: Boolean,
+  val sourceType: String?,
+  val sourceId: String?,
   @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
   val created: LocalDateTime,
   @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
